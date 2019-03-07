@@ -27,19 +27,16 @@
     "application/json"
   ],
   "paths": {
-    "/users": {
+    "/create/{Id}": {
       "post": {
-        "tags": [
-          "Users"
-        ],
-        "description": "Create new user in system",
+        "description": "Create new item",
         "parameters": [
           {
-            "name": "user",
+            "name": "item",
             "in": "body",
-            "description": "User that we want to create",
+            "description": "Create an item",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Item"
             }
           }
         ],
@@ -56,10 +53,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get all users in system",
+        "summary": "Get all items in system",
         "responses": {
           "200": {
             "description": "OK",
@@ -70,64 +64,55 @@
         }
       }
     },
-    "/users/{userId}": {
+    "/read/{Id}": {
       "parameters": [
         {
-          "name": "userId",
+          "name": "id",
           "in": "path",
           "required": true,
-          "description": "ID of user that we want to find",
+          "description": "ID of item that we want to find",
           "type": "string"
         }
       ],
       "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get user with given ID",
+        "summary": "Get item with given ID",
         "responses": {
           "200": {
-            "description": "User is found",
+            "description": "Item is found",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Item"
             }
           }
         }
       },
       "delete": {
-        "summary": "Delete user with given ID",
-        "tags": [
-          "Users"
-        ],
+        "summary": "Delete item with given ID",
         "responses": {
           "200": {
-            "description": "User is deleted",
+            "description": "Item is deleted",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Item"
             }
           }
         }
       },
       "put": {
-        "summary": "Update user with give ID",
-        "tags": [
-          "Users"
-        ],
+        "summary": "Update Item with give ID",
         "parameters": [
           {
-            "name": "user",
+            "name": "item",
             "in": "body",
-            "description": "User with new values of properties",
+            "description": "Item with new values of properties",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Item"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "User is updated",
+            "description": "Item is updated",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Item"
             }
           }
         }
@@ -135,31 +120,23 @@
     }
   },
   "definitions": {
-    "User": {
-      "required": [
-        "email",
-        "_id"
-      ],
+    "Item": {
       "properties": {
         "_id": {
           "type": "string",
           "uniqueItems": true
         },
-        "email": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "lastName": {
+        "Created_date": {
           "type": "string"
         },
-        "firstName": {
+        "status": {
           "type": "string"
         }
       }
     },
-    "Users": {
+    "Items": {
       "type": "array",
-      "$ref": "#/definitions/User"
+      "$ref": "#/definitions/Item"
     }
   }
 }
